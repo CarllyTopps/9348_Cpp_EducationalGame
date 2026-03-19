@@ -1,4 +1,4 @@
-# 9348_C-EducationalGame
+# 9348_C++_EducationalGame
 
 # 🎮 C++ Educational Game
 
