@@ -1,0 +1,1652 @@
+[
+  {
+    "text": "What is the chemical symbol for water?",
+    "choices": [
+      "NaCl",
+      "CO2",
+      "O2",
+      "H2O"
+    ],
+    "correct": 3,
+    "category": "Science"
+  },
+  {
+    "text": "What planet is known as the Red Planet?",
+    "choices": [
+      "Saturn",
+      "Jupiter",
+      "Mars",
+      "Venus"
+    ],
+    "correct": 2,
+    "category": "Science"
+  },
+  {
+    "text": "What is the largest ocean on Earth?",
+    "choices": [
+      "Atlantic Ocean",
+      "Arctic Ocean",
+      "Indian Ocean",
+      "Pacific Ocean"
+    ],
+    "correct": 3,
+    "category": "Science"
+  },
+  {
+    "text": "What is the powerhouse of the cell?",
+    "choices": [
+      "Nucleus",
+      "Ribosome",
+      "Mitochondria",
+      "Chloroplast"
+    ],
+    "correct": 2,
+    "category": "Science"
+  },
+  {
+    "text": "Which planet has the most moons?",
+    "choices": [
+      "Jupiter",
+      "Uranus",
+      "Mars",
+      "Saturn"
+    ],
+    "correct": 3,
+    "category": "Science"
+  },
+  {
+    "text": "What is the hardest natural substance on Earth?",
+    "choices": [
+      "Gold",
+      "Quartz",
+      "Iron",
+      "Diamond"
+    ],
+    "correct": 3,
+    "category": "Science"
+  },
+  {
+    "text": "Which gas do plants absorb from the air?",
+    "choices": [
+      "Nitrogen",
+      "Oxygen",
+      "Carbon Dioxide",
+      "Hydrogen"
+    ],
+    "correct": 2,
+    "category": "Science"
+  },
+  {
+    "text": "What is the speed of light (approx) in km/s?",
+    "choices": [
+      "150,000",
+      "1,000,000",
+      "300,000",
+      "500,000"
+    ],
+    "correct": 2,
+    "category": "Science"
+  },
+  {
+    "text": "What is the atomic number of Carbon?",
+    "choices": [
+      "6",
+      "12",
+      "8",
+      "14"
+    ],
+    "correct": 0,
+    "category": "Science"
+  },
+  {
+    "text": "Which organ pumps blood through the human body?",
+    "choices": [
+      "Kidney",
+      "Lung",
+      "Heart",
+      "Liver"
+    ],
+    "correct": 2,
+    "category": "Science"
+  },
+  {
+    "text": "What is the most abundant gas in Earth's atmosphere?",
+    "choices": [
+      "Carbon Dioxide",
+      "Oxygen",
+      "Argon",
+      "Nitrogen"
+    ],
+    "correct": 3,
+    "category": "Science"
+  },
+  {
+    "text": "What force keeps planets in orbit around the Sun?",
+    "choices": [
+      "Electrostatic Force",
+      "Friction",
+      "Magnetism",
+      "Gravity"
+    ],
+    "correct": 3,
+    "category": "Science"
+  },
+  {
+    "text": "What is the chemical symbol for Gold?",
+    "choices": [
+      "Pb",
+      "Ag",
+      "Au",
+      "Fe"
+    ],
+    "correct": 2,
+    "category": "Science"
+  },
+  {
+    "text": "What is the boiling point of water in Celsius?",
+    "choices": [
+      "80",
+      "120",
+      "90",
+      "100"
+    ],
+    "correct": 3,
+    "category": "Science"
+  },
+  {
+    "text": "How many bones are in the adult human body?",
+    "choices": [
+      "206",
+      "198",
+      "220",
+      "215"
+    ],
+    "correct": 0,
+    "category": "Science"
+  },
+  {
+    "text": "What planet is closest to the Sun?",
+    "choices": [
+      "Mars",
+      "Mercury",
+      "Earth",
+      "Venus"
+    ],
+    "correct": 1,
+    "category": "Science"
+  },
+  {
+    "text": "What is the process by which plants make food using sunlight?",
+    "choices": [
+      "Respiration",
+      "Osmosis",
+      "Fermentation",
+      "Photosynthesis"
+    ],
+    "correct": 3,
+    "category": "Science"
+  },
+  {
+    "text": "What type of energy does a moving object have?",
+    "choices": [
+      "Potential Energy",
+      "Chemical Energy",
+      "Kinetic Energy",
+      "Thermal Energy"
+    ],
+    "correct": 2,
+    "category": "Science"
+  },
+  {
+    "text": "What is the chemical formula for table salt?",
+    "choices": [
+      "MgCl2",
+      "CaCl2",
+      "KCl",
+      "NaCl"
+    ],
+    "correct": 3,
+    "category": "Science"
+  },
+  {
+    "text": "Which planet is known for its prominent ring system?",
+    "choices": [
+      "Saturn",
+      "Jupiter",
+      "Uranus",
+      "Neptune"
+    ],
+    "correct": 0,
+    "category": "Science"
+  },
+  {
+    "text": "What is the unit of electrical resistance?",
+    "choices": [
+      "Ohm",
+      "Ampere",
+      "Watt",
+      "Volt"
+    ],
+    "correct": 0,
+    "category": "Science"
+  },
+  {
+    "text": "What is the name of the galaxy we live in?",
+    "choices": [
+      "Milky Way",
+      "Whirlpool",
+      "Triangulum",
+      "Andromeda"
+    ],
+    "correct": 0,
+    "category": "Science"
+  },
+  {
+    "text": "What is the smallest unit of life?",
+    "choices": [
+      "Atom",
+      "Tissue",
+      "Molecule",
+      "Cell"
+    ],
+    "correct": 3,
+    "category": "Science"
+  },
+  {
+    "text": "What is the chemical symbol for Iron?",
+    "choices": [
+      "In",
+      "Fr",
+      "Fe",
+      "Ir"
+    ],
+    "correct": 2,
+    "category": "Science"
+  },
+  {
+    "text": "Which blood type is known as the universal donor?",
+    "choices": [
+      "B negative",
+      "O negative",
+      "A positive",
+      "AB positive"
+    ],
+    "correct": 1,
+    "category": "Science"
+  },
+  {
+    "text": "What part of the plant conducts photosynthesis?",
+    "choices": [
+      "Roots",
+      "Flowers",
+      "Leaves",
+      "Stems"
+    ],
+    "correct": 2,
+    "category": "Science"
+  },
+  {
+    "text": "What is the freezing point of water in Celsius?",
+    "choices": [
+      "5",
+      "10",
+      "-10",
+      "0"
+    ],
+    "correct": 3,
+    "category": "Science"
+  },
+  {
+    "text": "How many chambers does the human heart have?",
+    "choices": [
+      "2",
+      "6",
+      "4",
+      "3"
+    ],
+    "correct": 2,
+    "category": "Science"
+  },
+  {
+    "text": "What is the most common element in the universe?",
+    "choices": [
+      "Carbon",
+      "Helium",
+      "Hydrogen",
+      "Oxygen"
+    ],
+    "correct": 2,
+    "category": "Science"
+  },
+  {
+    "text": "What causes a lunar eclipse?",
+    "choices": [
+      "Earth's shadow falls on the Moon",
+      "Moon's shadow falls on Earth",
+      "Sun is blocked by the Moon",
+      "Moon moves away from Earth"
+    ],
+    "correct": 0,
+    "category": "Science"
+  },
+  {
+    "text": "What is 12 multiplied by 12?",
+    "choices": [
+      "132",
+      "144",
+      "148",
+      "124"
+    ],
+    "correct": 1,
+    "category": "Math"
+  },
+  {
+    "text": "How many sides does a hexagon have?",
+    "choices": [
+      "6",
+      "8",
+      "7",
+      "5"
+    ],
+    "correct": 0,
+    "category": "Math"
+  },
+  {
+    "text": "What is 2 to the power of 10?",
+    "choices": [
+      "1024",
+      "512",
+      "2048",
+      "256"
+    ],
+    "correct": 0,
+    "category": "Math"
+  },
+  {
+    "text": "What is the square root of 144?",
+    "choices": [
+      "14",
+      "13",
+      "12",
+      "11"
+    ],
+    "correct": 2,
+    "category": "Math"
+  },
+  {
+    "text": "What is the value of Pi (approx)?",
+    "choices": [
+      "2.71828",
+      "1.61803",
+      "3.14159",
+      "1.41421"
+    ],
+    "correct": 2,
+    "category": "Math"
+  },
+  {
+    "text": "What is the largest prime number below 20?",
+    "choices": [
+      "17",
+      "13",
+      "11",
+      "19"
+    ],
+    "correct": 3,
+    "category": "Math"
+  },
+  {
+    "text": "What is 15% of 200?",
+    "choices": [
+      "25",
+      "30",
+      "35",
+      "40"
+    ],
+    "correct": 1,
+    "category": "Math"
+  },
+  {
+    "text": "What is the sum of angles in a triangle?",
+    "choices": [
+      "180",
+      "90",
+      "360",
+      "270"
+    ],
+    "correct": 0,
+    "category": "Math"
+  },
+  {
+    "text": "What is 9 factorial (9!)?",
+    "choices": [
+      "40320",
+      "362880",
+      "5040",
+      "720"
+    ],
+    "correct": 1,
+    "category": "Math"
+  },
+  {
+    "text": "What is the area of a circle with radius 7? (use Pi = 3.14)",
+    "choices": [
+      "175.00",
+      "144.00",
+      "163.00",
+      "153.86"
+    ],
+    "correct": 3,
+    "category": "Math"
+  },
+  {
+    "text": "What is the next prime number after 13?",
+    "choices": [
+      "19",
+      "15",
+      "17",
+      "16"
+    ],
+    "correct": 2,
+    "category": "Math"
+  },
+  {
+    "text": "What is the result of 2^8?",
+    "choices": [
+      "512",
+      "128",
+      "256",
+      "64"
+    ],
+    "correct": 2,
+    "category": "Math"
+  },
+  {
+    "text": "What is 100 divided by 4?",
+    "choices": [
+      "40",
+      "20",
+      "30",
+      "25"
+    ],
+    "correct": 3,
+    "category": "Math"
+  },
+  {
+    "text": "What is the least common multiple of 4 and 6?",
+    "choices": [
+      "6",
+      "12",
+      "24",
+      "8"
+    ],
+    "correct": 1,
+    "category": "Math"
+  },
+  {
+    "text": "How many degrees are in a right angle?",
+    "choices": [
+      "45",
+      "90",
+      "60",
+      "180"
+    ],
+    "correct": 1,
+    "category": "Math"
+  },
+  {
+    "text": "What is the perimeter of a square with side 8?",
+    "choices": [
+      "64",
+      "32",
+      "24",
+      "16"
+    ],
+    "correct": 1,
+    "category": "Math"
+  },
+  {
+    "text": "What is the value of the golden ratio (approx)?",
+    "choices": [
+      "3.141",
+      "1.414",
+      "2.718",
+      "1.618"
+    ],
+    "correct": 3,
+    "category": "Math"
+  },
+  {
+    "text": "What is 50% of 480?",
+    "choices": [
+      "120",
+      "96",
+      "240",
+      "200"
+    ],
+    "correct": 2,
+    "category": "Math"
+  },
+  {
+    "text": "What is the Roman numeral for 50?",
+    "choices": [
+      "V",
+      "L",
+      "C",
+      "D"
+    ],
+    "correct": 1,
+    "category": "Math"
+  },
+  {
+    "text": "How many degrees are in a full circle?",
+    "choices": [
+      "180",
+      "270",
+      "90",
+      "360"
+    ],
+    "correct": 3,
+    "category": "Math"
+  },
+  {
+    "text": "What is the product of 7 and 8?",
+    "choices": [
+      "63",
+      "54",
+      "48",
+      "56"
+    ],
+    "correct": 3,
+    "category": "Math"
+  },
+  {
+    "text": "What is the hypotenuse of a right triangle with sides 3 and 4?",
+    "choices": [
+      "6",
+      "8",
+      "7",
+      "5"
+    ],
+    "correct": 3,
+    "category": "Math"
+  },
+  {
+    "text": "What is 3 cubed?",
+    "choices": [
+      "27",
+      "81",
+      "18",
+      "9"
+    ],
+    "correct": 0,
+    "category": "Math"
+  },
+  {
+    "text": "What is the sum of the first 10 natural numbers?",
+    "choices": [
+      "55",
+      "45",
+      "60",
+      "50"
+    ],
+    "correct": 0,
+    "category": "Math"
+  },
+  {
+    "text": "What is the GCD of 24 and 36?",
+    "choices": [
+      "24",
+      "12",
+      "18",
+      "6"
+    ],
+    "correct": 1,
+    "category": "Math"
+  },
+  {
+    "text": "What is the slope of a horizontal line?",
+    "choices": [
+      "0",
+      "-1",
+      "1",
+      "Undefined"
+    ],
+    "correct": 0,
+    "category": "Math"
+  },
+  {
+    "text": "How many vertices does a cube have?",
+    "choices": [
+      "8",
+      "6",
+      "12",
+      "4"
+    ],
+    "correct": 0,
+    "category": "Math"
+  },
+  {
+    "text": "What is the median of: 3, 7, 5, 1, 9?",
+    "choices": [
+      "7",
+      "3",
+      "6",
+      "5"
+    ],
+    "correct": 3,
+    "category": "Math"
+  },
+  {
+    "text": "What is 1000 in binary?",
+    "choices": [
+      "16",
+      "10",
+      "4",
+      "8"
+    ],
+    "correct": 3,
+    "category": "Math"
+  },
+  {
+    "text": "How many faces does a cube have?",
+    "choices": [
+      "12",
+      "6",
+      "4",
+      "8"
+    ],
+    "correct": 1,
+    "category": "Math"
+  },
+  {
+    "text": "Who wrote Romeo and Juliet?",
+    "choices": [
+      "Charles Dickens",
+      "Mark Twain",
+      "Jane Austen",
+      "William Shakespeare"
+    ],
+    "correct": 3,
+    "category": "History"
+  },
+  {
+    "text": "What year did World War II end?",
+    "choices": [
+      "1950",
+      "1918",
+      "1945",
+      "1939"
+    ],
+    "correct": 2,
+    "category": "History"
+  },
+  {
+    "text": "Who painted the Mona Lisa?",
+    "choices": [
+      "Pablo Picasso",
+      "Michelangelo",
+      "Leonardo da Vinci",
+      "Vincent van Gogh"
+    ],
+    "correct": 2,
+    "category": "History"
+  },
+  {
+    "text": "In what year did World War I begin?",
+    "choices": [
+      "1914",
+      "1918",
+      "1939",
+      "1905"
+    ],
+    "correct": 0,
+    "category": "History"
+  },
+  {
+    "text": "Who was the first President of the United States?",
+    "choices": [
+      "John Adams",
+      "George Washington",
+      "Thomas Jefferson",
+      "Abraham Lincoln"
+    ],
+    "correct": 1,
+    "category": "History"
+  },
+  {
+    "text": "What ancient wonder was located in Alexandria?",
+    "choices": [
+      "The Hanging Gardens",
+      "The Colossus",
+      "The Lighthouse",
+      "The Great Pyramid"
+    ],
+    "correct": 2,
+    "category": "History"
+  },
+  {
+    "text": "Who was the first man to walk on the Moon?",
+    "choices": [
+      "Buzz Aldrin",
+      "Yuri Gagarin",
+      "Neil Armstrong",
+      "John Glenn"
+    ],
+    "correct": 2,
+    "category": "History"
+  },
+  {
+    "text": "What empire was ruled by Julius Caesar?",
+    "choices": [
+      "Persian Empire",
+      "Greek Empire",
+      "Ottoman Empire",
+      "Roman Empire"
+    ],
+    "correct": 3,
+    "category": "History"
+  },
+  {
+    "text": "In what year did the Berlin Wall fall?",
+    "choices": [
+      "1989",
+      "1975",
+      "1991",
+      "1985"
+    ],
+    "correct": 0,
+    "category": "History"
+  },
+  {
+    "text": "Who invented the telephone?",
+    "choices": [
+      "Thomas Edison",
+      "Alexander Graham Bell",
+      "Nikola Tesla",
+      "Guglielmo Marconi"
+    ],
+    "correct": 1,
+    "category": "History"
+  },
+  {
+    "text": "What year did the Titanic sink?",
+    "choices": [
+      "1920",
+      "1905",
+      "1898",
+      "1912"
+    ],
+    "correct": 3,
+    "category": "History"
+  },
+  {
+    "text": "Which country was the first to grant women the right to vote?",
+    "choices": [
+      "Australia",
+      "UK",
+      "New Zealand",
+      "USA"
+    ],
+    "correct": 2,
+    "category": "History"
+  },
+  {
+    "text": "Who was the first female Prime Minister of the UK?",
+    "choices": [
+      "Angela Merkel",
+      "Indira Gandhi",
+      "Margaret Thatcher",
+      "Theresa May"
+    ],
+    "correct": 2,
+    "category": "History"
+  },
+  {
+    "text": "Which civilization built the Machu Picchu?",
+    "choices": [
+      "Maya",
+      "Inca",
+      "Olmec",
+      "Aztec"
+    ],
+    "correct": 1,
+    "category": "History"
+  },
+  {
+    "text": "What was the name of the first artificial satellite launched into space?",
+    "choices": [
+      "Apollo 1",
+      "Sputnik 1",
+      "Explorer 1",
+      "Vostok 1"
+    ],
+    "correct": 1,
+    "category": "History"
+  },
+  {
+    "text": "In what year did the French Revolution begin?",
+    "choices": [
+      "1804",
+      "1815",
+      "1776",
+      "1789"
+    ],
+    "correct": 3,
+    "category": "History"
+  },
+  {
+    "text": "Who was known as the 'Maid of Orleans'?",
+    "choices": [
+      "Marie Curie",
+      "Cleopatra",
+      "Catherine the Great",
+      "Joan of Arc"
+    ],
+    "correct": 3,
+    "category": "History"
+  },
+  {
+    "text": "What ancient structure was built by Emperor Qin Shi Huang?",
+    "choices": [
+      "The Forbidden City",
+      "The Terracotta Army",
+      "The Summer Palace",
+      "The Great Wall of China"
+    ],
+    "correct": 3,
+    "category": "History"
+  },
+  {
+    "text": "Who wrote the Declaration of Independence?",
+    "choices": [
+      "Thomas Jefferson",
+      "George Washington",
+      "Benjamin Franklin",
+      "John Adams"
+    ],
+    "correct": 0,
+    "category": "History"
+  },
+  {
+    "text": "What year did the Philippines gain independence from the USA?",
+    "choices": [
+      "1898",
+      "1946",
+      "1952",
+      "1935"
+    ],
+    "correct": 1,
+    "category": "History"
+  },
+  {
+    "text": "Which country did Adolf Hitler come from originally?",
+    "choices": [
+      "Poland",
+      "Austria",
+      "Hungary",
+      "Germany"
+    ],
+    "correct": 1,
+    "category": "History"
+  },
+  {
+    "text": "What was the name of the ship that Charles Darwin sailed on?",
+    "choices": [
+      "HMS Beagle",
+      "Mayflower",
+      "HMS Victory",
+      "Santa Maria"
+    ],
+    "correct": 0,
+    "category": "History"
+  },
+  {
+    "text": "Who was the longest-reigning monarch of the United Kingdom?",
+    "choices": [
+      "Queen Elizabeth II",
+      "King Henry VIII",
+      "Queen Victoria",
+      "King George III"
+    ],
+    "correct": 0,
+    "category": "History"
+  },
+  {
+    "text": "In what year did Christopher Columbus first reach the Americas?",
+    "choices": [
+      "1488",
+      "1502",
+      "1492",
+      "1498"
+    ],
+    "correct": 2,
+    "category": "History"
+  },
+  {
+    "text": "Which battle ended Napoleon's rule in Europe?",
+    "choices": [
+      "Battle of Borodino",
+      "Battle of Leipzig",
+      "Battle of Waterloo",
+      "Battle of Trafalgar"
+    ],
+    "correct": 2,
+    "category": "History"
+  },
+  {
+    "text": "Who was the Egyptian queen that allied with Julius Caesar?",
+    "choices": [
+      "Nefertiti",
+      "Isis",
+      "Cleopatra",
+      "Hatshepsut"
+    ],
+    "correct": 2,
+    "category": "History"
+  },
+  {
+    "text": "In what year was the Magna Carta signed?",
+    "choices": [
+      "1066",
+      "1215",
+      "1348",
+      "1400"
+    ],
+    "correct": 1,
+    "category": "History"
+  },
+  {
+    "text": "What event triggered the start of World War I?",
+    "choices": [
+      "Invasion of Poland",
+      "Fall of the Berlin Wall",
+      "Bombing of Pearl Harbor",
+      "Assassination of Archduke Franz Ferdinand"
+    ],
+    "correct": 3,
+    "category": "History"
+  },
+  {
+    "text": "Who was the first person to circumnavigate the globe?",
+    "choices": [
+      "James Cook",
+      "Vasco da Gama",
+      "Ferdinand Magellan",
+      "Christopher Columbus"
+    ],
+    "correct": 2,
+    "category": "History"
+  },
+  {
+    "text": "What year was the United Nations founded?",
+    "choices": [
+      "1950",
+      "1945",
+      "1939",
+      "1919"
+    ],
+    "correct": 1,
+    "category": "History"
+  },
+  {
+    "text": "What is the capital of Japan?",
+    "choices": [
+      "Bangkok",
+      "Tokyo",
+      "Seoul",
+      "Beijing"
+    ],
+    "correct": 1,
+    "category": "Geography"
+  },
+  {
+    "text": "What is the largest continent by area?",
+    "choices": [
+      "North America",
+      "Europe",
+      "Africa",
+      "Asia"
+    ],
+    "correct": 3,
+    "category": "Geography"
+  },
+  {
+    "text": "Which is the longest river in the world?",
+    "choices": [
+      "Mississippi",
+      "Amazon",
+      "Nile",
+      "Yangtze"
+    ],
+    "correct": 2,
+    "category": "Geography"
+  },
+  {
+    "text": "What is the capital of Australia?",
+    "choices": [
+      "Canberra",
+      "Melbourne",
+      "Brisbane",
+      "Sydney"
+    ],
+    "correct": 0,
+    "category": "Geography"
+  },
+  {
+    "text": "Which country has the largest population?",
+    "choices": [
+      "India",
+      "Indonesia",
+      "USA",
+      "China"
+    ],
+    "correct": 0,
+    "category": "Geography"
+  },
+  {
+    "text": "What is the smallest country in the world?",
+    "choices": [
+      "San Marino",
+      "Vatican City",
+      "Monaco",
+      "Liechtenstein"
+    ],
+    "correct": 1,
+    "category": "Geography"
+  },
+  {
+    "text": "Which desert is the largest in the world?",
+    "choices": [
+      "Gobi",
+      "Kalahari",
+      "Arabian",
+      "Sahara"
+    ],
+    "correct": 3,
+    "category": "Geography"
+  },
+  {
+    "text": "What is the capital of Brazil?",
+    "choices": [
+      "Rio de Janeiro",
+      "Salvador",
+      "Sao Paulo",
+      "Brasilia"
+    ],
+    "correct": 3,
+    "category": "Geography"
+  },
+  {
+    "text": "Which mountain is the highest in the world?",
+    "choices": [
+      "Lhotse",
+      "K2",
+      "Mount Everest",
+      "Kangchenjunga"
+    ],
+    "correct": 2,
+    "category": "Geography"
+  },
+  {
+    "text": "Which country is the largest by land area?",
+    "choices": [
+      "USA",
+      "Canada",
+      "China",
+      "Russia"
+    ],
+    "correct": 3,
+    "category": "Geography"
+  },
+  {
+    "text": "What is the capital of France?",
+    "choices": [
+      "Nice",
+      "Lyon",
+      "Paris",
+      "Marseille"
+    ],
+    "correct": 2,
+    "category": "Geography"
+  },
+  {
+    "text": "On which continent is the Amazon rainforest located?",
+    "choices": [
+      "Africa",
+      "South America",
+      "North America",
+      "Asia"
+    ],
+    "correct": 1,
+    "category": "Geography"
+  },
+  {
+    "text": "What is the capital of the Philippines?",
+    "choices": [
+      "Cebu",
+      "Manila",
+      "Quezon City",
+      "Davao"
+    ],
+    "correct": 1,
+    "category": "Geography"
+  },
+  {
+    "text": "Which ocean lies between Africa and Australia?",
+    "choices": [
+      "Atlantic Ocean",
+      "Indian Ocean",
+      "Southern Ocean",
+      "Pacific Ocean"
+    ],
+    "correct": 1,
+    "category": "Geography"
+  },
+  {
+    "text": "What is the capital of Canada?",
+    "choices": [
+      "Toronto",
+      "Montreal",
+      "Vancouver",
+      "Ottawa"
+    ],
+    "correct": 3,
+    "category": "Geography"
+  },
+  {
+    "text": "Which country has the most natural lakes?",
+    "choices": [
+      "Finland",
+      "Canada",
+      "Russia",
+      "USA"
+    ],
+    "correct": 1,
+    "category": "Geography"
+  },
+  {
+    "text": "What is the capital of Germany?",
+    "choices": [
+      "Frankfurt",
+      "Munich",
+      "Berlin",
+      "Hamburg"
+    ],
+    "correct": 2,
+    "category": "Geography"
+  },
+  {
+    "text": "What is the longest mountain range in the world?",
+    "choices": [
+      "Rockies",
+      "Andes",
+      "Himalayas",
+      "Alps"
+    ],
+    "correct": 1,
+    "category": "Geography"
+  },
+  {
+    "text": "Which country is known as the Land of the Rising Sun?",
+    "choices": [
+      "Thailand",
+      "China",
+      "South Korea",
+      "Japan"
+    ],
+    "correct": 3,
+    "category": "Geography"
+  },
+  {
+    "text": "What is the capital of Italy?",
+    "choices": [
+      "Milan",
+      "Florence",
+      "Rome",
+      "Venice"
+    ],
+    "correct": 2,
+    "category": "Geography"
+  },
+  {
+    "text": "Which African country has the largest population?",
+    "choices": [
+      "South Africa",
+      "Ethiopia",
+      "Nigeria",
+      "Egypt"
+    ],
+    "correct": 2,
+    "category": "Geography"
+  },
+  {
+    "text": "What is the capital of South Korea?",
+    "choices": [
+      "Seoul",
+      "Daegu",
+      "Incheon",
+      "Busan"
+    ],
+    "correct": 0,
+    "category": "Geography"
+  },
+  {
+    "text": "Which country does the Amazon River primarily flow through?",
+    "choices": [
+      "Peru",
+      "Brazil",
+      "Colombia",
+      "Venezuela"
+    ],
+    "correct": 1,
+    "category": "Geography"
+  },
+  {
+    "text": "What is the tallest active volcano in the world?",
+    "choices": [
+      "Mauna Loa",
+      "Mount Etna",
+      "Mount St. Helens",
+      "Ojos del Salado"
+    ],
+    "correct": 3,
+    "category": "Geography"
+  },
+  {
+    "text": "Which country has the longest coastline in the world?",
+    "choices": [
+      "Australia",
+      "Norway",
+      "Russia",
+      "Canada"
+    ],
+    "correct": 3,
+    "category": "Geography"
+  },
+  {
+    "text": "What is the capital of Egypt?",
+    "choices": [
+      "Alexandria",
+      "Giza",
+      "Cairo",
+      "Luxor"
+    ],
+    "correct": 2,
+    "category": "Geography"
+  },
+  {
+    "text": "What is the name of the sea between Europe and Africa?",
+    "choices": [
+      "Caspian Sea",
+      "Mediterranean Sea",
+      "Red Sea",
+      "Black Sea"
+    ],
+    "correct": 1,
+    "category": "Geography"
+  },
+  {
+    "text": "Which country is home to the Great Barrier Reef?",
+    "choices": [
+      "Philippines",
+      "Maldives",
+      "Australia",
+      "Indonesia"
+    ],
+    "correct": 2,
+    "category": "Geography"
+  },
+  {
+    "text": "What is the capital of Spain?",
+    "choices": [
+      "Valencia",
+      "Seville",
+      "Barcelona",
+      "Madrid"
+    ],
+    "correct": 3,
+    "category": "Geography"
+  },
+  {
+    "text": "Which two continents does the Panama Canal connect?",
+    "choices": [
+      "Asia and North America",
+      "South America and Africa",
+      "North America and South America",
+      "North America and Europe"
+    ],
+    "correct": 2,
+    "category": "Geography"
+  },
+  {
+    "text": "Which data structure uses LIFO order?",
+    "choices": [
+      "Array",
+      "Stack",
+      "Linked List",
+      "Queue"
+    ],
+    "correct": 1,
+    "category": "Computing"
+  },
+  {
+    "text": "What does CPU stand for?",
+    "choices": [
+      "Central Processing Unit",
+      "Computer Processing Unit",
+      "Central Program Unit",
+      "Core Processing Unit"
+    ],
+    "correct": 0,
+    "category": "Computing"
+  },
+  {
+    "text": "What does HTML stand for?",
+    "choices": [
+      "High Transfer Markup Language",
+      "HyperText Markup Language",
+      "HyperText Main Language",
+      "Hyper Transfer Markup Language"
+    ],
+    "correct": 1,
+    "category": "Computing"
+  },
+  {
+    "text": "In OOP, what does encapsulation mean?",
+    "choices": [
+      "Inheriting from a base class",
+      "Overriding parent methods",
+      "Hiding internal data behind a public interface",
+      "Creating multiple instances"
+    ],
+    "correct": 2,
+    "category": "Computing"
+  },
+  {
+    "text": "What does RAM stand for?",
+    "choices": [
+      "Rapid Access Memory",
+      "Read Access Memory",
+      "Random Access Memory",
+      "Random Allocated Memory"
+    ],
+    "correct": 2,
+    "category": "Computing"
+  },
+  {
+    "text": "In C++, which keyword is used to inherit a class?",
+    "choices": [
+      "inherits",
+      "implements",
+      ": public",
+      "extends"
+    ],
+    "correct": 2,
+    "category": "Computing"
+  },
+  {
+    "text": "What does OOP stand for?",
+    "choices": [
+      "Ordered Object Programming",
+      "Object-Oriented Programming",
+      "Object-Oriented Processing",
+      "Output-Oriented Programming"
+    ],
+    "correct": 1,
+    "category": "Computing"
+  },
+  {
+    "text": "What is a compiler?",
+    "choices": [
+      "An operating system component",
+      "A tool to manage memory",
+      "A program that translates source code to machine code",
+      "A program that runs code line by line"
+    ],
+    "correct": 2,
+    "category": "Computing"
+  },
+  {
+    "text": "Which sorting algorithm has the best average-case time complexity?",
+    "choices": [
+      "Merge Sort",
+      "Insertion Sort",
+      "Bubble Sort",
+      "Selection Sort"
+    ],
+    "correct": 0,
+    "category": "Computing"
+  },
+  {
+    "text": "What does GPU stand for?",
+    "choices": [
+      "Global Processing Unit",
+      "Graphics Program Utility",
+      "General Processing Unit",
+      "Graphics Processing Unit"
+    ],
+    "correct": 3,
+    "category": "Computing"
+  },
+  {
+    "text": "What is the base of the binary number system?",
+    "choices": [
+      "2",
+      "8",
+      "10",
+      "16"
+    ],
+    "correct": 0,
+    "category": "Computing"
+  },
+  {
+    "text": "Which data structure uses FIFO order?",
+    "choices": [
+      "Tree",
+      "Stack",
+      "Graph",
+      "Queue"
+    ],
+    "correct": 3,
+    "category": "Computing"
+  },
+  {
+    "text": "What does CSS stand for?",
+    "choices": [
+      "Cascading Style Sheets",
+      "Creative Style Syntax",
+      "Computer Style Sheets",
+      "Cascading Script Sheets"
+    ],
+    "correct": 0,
+    "category": "Computing"
+  },
+  {
+    "text": "In OOP, what is polymorphism?",
+    "choices": [
+      "Grouping related methods",
+      "Hiding data from users",
+      "Copying an object",
+      "The ability of a function to take different forms"
+    ],
+    "correct": 3,
+    "category": "Computing"
+  },
+  {
+    "text": "What does URL stand for?",
+    "choices": [
+      "Uniform Resource Locator",
+      "Universal Resource Locator",
+      "Universal Resource Link",
+      "Uniform Resource Link"
+    ],
+    "correct": 0,
+    "category": "Computing"
+  },
+  {
+    "text": "What is the time complexity of binary search?",
+    "choices": [
+      "O(n)",
+      "O(log n)",
+      "O(n^2)",
+      "O(1)"
+    ],
+    "correct": 1,
+    "category": "Computing"
+  },
+  {
+    "text": "What does SQL stand for?",
+    "choices": [
+      "Standard Query Language",
+      "Structured Query Language",
+      "Simple Query Language",
+      "Structured Question Language"
+    ],
+    "correct": 1,
+    "category": "Computing"
+  },
+  {
+    "text": "Which OOP concept allows a class to use methods from a parent class?",
+    "choices": [
+      "Abstraction",
+      "Polymorphism",
+      "Inheritance",
+      "Encapsulation"
+    ],
+    "correct": 2,
+    "category": "Computing"
+  },
+  {
+    "text": "What is a pointer in C++?",
+    "choices": [
+      "A type of array",
+      "A class method",
+      "A function that returns a value",
+      "A variable that stores a memory address"
+    ],
+    "correct": 3,
+    "category": "Computing"
+  },
+  {
+    "text": "What does the 'this' keyword refer to in C++?",
+    "choices": [
+      "A static member",
+      "The current object instance",
+      "The parent class",
+      "The main function"
+    ],
+    "correct": 1,
+    "category": "Computing"
+  },
+  {
+    "text": "What is an abstract class in OOP?",
+    "choices": [
+      "A class that cannot be instantiated directly",
+      "A class with no methods",
+      "A class that inherits everything",
+      "A class with only static members"
+    ],
+    "correct": 0,
+    "category": "Computing"
+  },
+  {
+    "text": "Which of these is NOT a programming paradigm?",
+    "choices": [
+      "Procedural",
+      "Object-Oriented",
+      "Functional",
+      "Sequential Binary Logic"
+    ],
+    "correct": 3,
+    "category": "Computing"
+  },
+  {
+    "text": "What is the output of 5 % 2 in C++?",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "0"
+    ],
+    "correct": 0,
+    "category": "Computing"
+  },
+  {
+    "text": "What does API stand for?",
+    "choices": [
+      "Application Programming Interface",
+      "Automated Programming Interface",
+      "Applied Program Interface",
+      "Application Process Integration"
+    ],
+    "correct": 0,
+    "category": "Computing"
+  },
+  {
+    "text": "Which keyword is used to declare a constant in C++?",
+    "choices": [
+      "static",
+      "fixed",
+      "const",
+      "final"
+    ],
+    "correct": 2,
+    "category": "Computing"
+  },
+  {
+    "text": "What is recursion in programming?",
+    "choices": [
+      "A loop that runs forever",
+      "A function that calls itself",
+      "A class that inherits itself",
+      "A variable that references itself"
+    ],
+    "correct": 1,
+    "category": "Computing"
+  },
+  {
+    "text": "What is the purpose of a destructor in C++?",
+    "choices": [
+      "To initialize class members",
+      "To clean up resources when an object is destroyed",
+      "To create an object",
+      "To copy an object"
+    ],
+    "correct": 1,
+    "category": "Computing"
+  },
+  {
+    "text": "What does IDE stand for?",
+    "choices": [
+      "Interface Development Environment",
+      "Integrated Development Environment",
+      "Internal Development Engine",
+      "Integrated Design Editor"
+    ],
+    "correct": 1,
+    "category": "Computing"
+  },
+  {
+    "text": "Which of these is a valid C++ access specifier?",
+    "choices": [
+      "protected",
+      "hidden",
+      "sealed",
+      "internal"
+    ],
+    "correct": 0,
+    "category": "Computing"
+  },
+  {
+    "text": "What is the entry point of a C++ program?",
+    "choices": [
+      "main()",
+      "run()",
+      "start()",
+      "init()"
+    ],
+    "correct": 0,
+    "category": "Computing"
+  }
+]
