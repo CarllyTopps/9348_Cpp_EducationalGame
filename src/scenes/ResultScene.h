@@ -20,7 +20,7 @@ public:
         hQuit = CheckCollisionPointRec(m, btnQuit);
         if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
             if (hPlay) sceneNext = SCENE_MENU;
-            if (hQuit) sceneNext = SCENE_EXIT;
+            if (hQuit) sceneNext = SCENE_MENU;
         }
     }
 
@@ -52,7 +52,7 @@ public:
         // ── Buttons ───────────────────────────────────────────
         UIStyle::drawButton(btnPlay, "Play Again", hPlay,
                              {25, 14, 90, 255}, UIStyle::ACCENT_CYAN);
-        UIStyle::drawButton(btnQuit, "Quit",       hQuit,
+        UIStyle::drawButton(btnQuit, "Main Menu",  hQuit,
                              {80, 12, 12, 255}, UIStyle::ACCENT_RED);
 
         // ── Blink ─────────────────────────────────────────────

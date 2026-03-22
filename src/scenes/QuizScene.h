@@ -31,6 +31,23 @@ public:
 
     void update() override {
         if (sceneNext != SCENE_STAY) return;
+        
+        if (IsKeyPressed(KEY_ESCAPE)) {
+            isPaused = !isPaused;
+        }
+
+        if (isPaused) {
+            Vector2 m = GetMousePosition();
+            hResume = CheckCollisionPointRec(m, btnResume);
+            hQuitMenu = CheckCollisionPointRec(m, btnQuitMenu);
+
+            if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
+                if (hResume) isPaused = false;
+                if (hQuitMenu) sceneNext = SCENE_MENU;
+            }
+            return;
+        }
+        
         pulse += GetFrameTime() * 1.6f;
 
         if (feedbackState != FeedbackState::NONE) {
@@ -157,6 +174,9 @@ public:
             UIStyle::drawTextC("Real-time PvP  —  [P1: A-D | P2: Numpad 1-4]", 640, 14, 18, WHITE);
         }
 
+        // Pause Instruction
+        UIStyle::drawText("[ESC] to Pause", 1130, 20, 18, Fade(UIStyle::TEXT_DIM, 0.6f));
+
         // ── Main card ─────────────────────────────────────────
         DrawRectangleRounded({63, 64, 1154, 520}, 0.05f, 8, Fade(BLACK, 0.50f));
         DrawRectangleRounded({60, 60, 1154, 520}, 0.05f, 8, UIStyle::BG_CARD);
@@ -205,6 +225,13 @@ public:
         if (shakeTimer > 0 && feedbackState == FeedbackState::NONE) EndMode2D();
         
         if (feedbackState != FeedbackState::NONE) drawFeedback(q);
+
+        if (isPaused) {
+            DrawRectangle(0, 0, 1280, 720, Fade(BLACK, 0.94f));
+            UIStyle::drawTextC("PAUSED", 640, 220, 64, UIStyle::ACCENT_CYAN);
+            UIStyle::drawButton(btnResume, "Resume", hResume, {(unsigned char)25, (unsigned char)14, (unsigned char)90, (unsigned char)255}, UIStyle::ACCENT_CYAN);
+            UIStyle::drawButton(btnQuitMenu, "Quit to Menu", hQuitMenu, {(unsigned char)80, (unsigned char)12, (unsigned char)12, (unsigned char)255}, UIStyle::ACCENT_RED);
+        }
     }
 
     int nextScene() override { return sceneNext; }
@@ -217,6 +244,11 @@ private:
     float         timeP1, timeP2;
     float         shakeTimer, blackoutTimer;
     std::string   sabotageMessage;
+    
+    bool          isPaused = false;
+    Rectangle     btnResume = {500, 340, 280, 64};
+    Rectangle     btnQuitMenu = {500, 430, 280, 64};
+    bool          hResume = false, hQuitMenu = false;
     
     FeedbackState feedbackState;
     float         feedbackTimer, pulse;

@@ -42,6 +42,15 @@ public:
         pulse += GetFrameTime() * 1.5f;
 
         Vector2 m = GetMousePosition();
+        hBack = CheckCollisionPointRec(m, btnBack);
+        
+        if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
+            if (hBack) {
+                sceneNext = SCENE_CATEGORY;
+                return;
+            }
+        }
+
         for (size_t i = 0; i < buttons.size(); i++) {
             hovered[i] = CheckCollisionPointRec(m, buttons[i]);
             if (hovered[i] && IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
@@ -67,6 +76,8 @@ public:
         UIStyle::drawTextC("How many questions?", 640, 180, 56, UIStyle::TEXT_PRIMARY);
         UIStyle::drawTextC("Choose the length of your game", 640, 240, 22, UIStyle::TEXT_SECONDARY);
 
+        UIStyle::drawButton(btnBack, "Back", hBack, {(unsigned char)38,(unsigned char)12,(unsigned char)80,(unsigned char)255}, UIStyle::ACCENT_RED, 20.0f);
+
         for (size_t i = 0; i < buttons.size(); i++) {
             char label[64];
             if (options[i] == state.quizManager.totalQuestions()) {
@@ -90,4 +101,6 @@ private:
     std::vector<int> options;
     std::vector<Rectangle> buttons;
     std::vector<bool> hovered;
+    Rectangle btnBack = {1140, 16, 120, 40};
+    bool hBack = false;
 };

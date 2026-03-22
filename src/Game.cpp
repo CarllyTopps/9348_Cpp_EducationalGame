@@ -8,6 +8,7 @@
 
 void Game::run() {
     InitWindow(screenW, screenH, "Quiz Planet");
+    SetExitKey(KEY_NULL); // Prevent ESC from closing the window immediately
     UIStyle::load();  
     SetTargetFPS(60);
 

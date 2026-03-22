@@ -17,10 +17,15 @@ public:
     void update() override {
         pulse += GetFrameTime() * 1.6f;
         Vector2 mouse = GetMousePosition();
+        hBack = CheckCollisionPointRec(mouse, btnBack);
         for (int i = 0; i < (int)buttons.size(); i++)
             hovered[i] = CheckCollisionPointRec(mouse, buttons[i]);
 
         if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
+            if (hBack) {
+                sceneNext = SCENE_MENU;
+                return;
+            }
             for (int i = 0; i < (int)buttons.size(); i++) {
                 if (hovered[i]) {
                     state.selectedCategory = state.availableCategories[i];
@@ -63,6 +68,8 @@ public:
         DrawRectangle(340, 220, 600, 1, Fade(WHITE, 0.10f));
         UIStyle::drawTextC("Choose your topic", 640, 234, 20, UIStyle::TEXT_DIM);
 
+        UIStyle::drawButton(btnBack, "Back", hBack, {(unsigned char)38,(unsigned char)12,(unsigned char)80,(unsigned char)255}, UIStyle::ACCENT_RED, 20.0f);
+
         // ── Category buttons ──────────────────────────────────
         for (int i = 0; i < (int)buttons.size(); i++)
             drawCategoryBtn(buttons[i],
@@ -82,6 +89,8 @@ private:
     float pulse;
     std::vector<Rectangle> buttons;
     std::vector<bool>      hovered;
+    Rectangle btnBack = {1140, 16, 120, 40};
+    bool hBack = false;
 
     Color accentFor(int idx) {
         Color p[] = {
