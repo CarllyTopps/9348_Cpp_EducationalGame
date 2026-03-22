@@ -12,7 +12,7 @@
 - Customizable Game Lengths (e.g. 10, 20, or 30 questions)
 - 15-second countdown timer per question
 - Score system: 100 base + time bonus + streak bonus
-- PvP mode with alternating turns (P1: A/B/C/D — P2: ←/↑/→/↓)
+- PvP mode with alternating turns (P1: A/B/C/D — P2: 1/2/3/4)
 - Sleek animated horizontal sliding banner for Correct/Wrong/Timeout feedback
 - Results screen with winner cards (PvP) or performance grades (Solo)
 - Advanced greedy word wrapping for dynamically scaled questions and answers
@@ -113,13 +113,11 @@ VS Code will automatically trigger the `build debug` task (compiling all `.cpp` 
 
 ## Object-Oriented Programming (OOP) Design
 
-The project is built on solid OOP foundations to ensure the code is scalable and maintainable:
-
-| Principle         | Implementation in Quiz Planet                                            |
-| :---------------- | :----------------------------------------------------------------------- |
-| **Inheritance**   | `MenuScene`, `QuizScene`, `ResultScene` all inherit from `Scene`         |
-| **Polymorphism**  | `Game` calls `update()`/`draw()` on any `Scene*` via `unique_ptr`        |
-| **Encapsulation** | `Player`, `Timer`, `QuizManager` each own their data privately           |
-| **Abstraction**   | `Scene` defines a pure-virtual interface; `Game` never knows which scene |
+| Principle         | Implementation in Quiz Planet                                     |
+| :---------------- | :---------------------------------------------------------------- |
+| **Inheritance**   | `MenuScene`, `QuizScene`, `ResultScene` all inherit from `Scene`  |
+| **Polymorphism**  | `Game` calls `update()`/`draw()` on any `Scene*` via `unique_ptr` |
+| **Encapsulation** | `Player`, `Timer`, `QuizManager` each own their data privately    |
+| **Abstraction**   | `Scene` defines a pure-virtual interface                          |
 
 ---
