@@ -113,11 +113,11 @@ VS Code will automatically trigger the `build debug` task (compiling all `.cpp` 
 
 ## Object-Oriented Programming (OOP) Design
 
-| Principle         | Implementation in Quiz Planet                                     |
-| :---------------- | :---------------------------------------------------------------- |
-| **Inheritance**   | `MenuScene`, `QuizScene`, `ResultScene` all inherit from `Scene`  |
-| **Polymorphism**  | `Game` calls `update()`/`draw()` on any `Scene*` via `unique_ptr` |
-| **Encapsulation** | `Player`, `Timer`, `QuizManager` each own their data privately    |
-| **Abstraction**   | `Scene` defines a pure-virtual interface                          |
+| Principle         | Implementation in Quiz Planet                                             |
+| :---------------- | :------------------------------------------------------------------------ |
+| **Inheritance**   | `MenuScene`, `QuizScene`, `ResultScene` all inherit from `Scene`          |
+| **Polymorphism**  | `Game` calls `update()`/`draw()` on any `Scene*` via `unique_ptr`/pointer |
+| **Encapsulation** | `Player`, `Timer`, `QuizManager` each own their data privately            |
+| **Abstraction**   | `Scene` defines a pure-virtual interface                                  |
 
 ---
