@@ -115,13 +115,11 @@ VS Code will automatically trigger the `build debug` task (compiling all `.cpp` 
 
 The project is built on solid OOP foundations to ensure the code is scalable and maintainable:
 
-| Principle                 | Implementation in Quiz Planet                                                                                                                                                   |
-| :------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Inheritance**           | All gameplay states (e.g., `QuizScene`, `MenuScene`) inherit from the `Scene` abstract base class.                                                                              |
-| **Polymorphism**          | The `Game` engine manages a `std::unique_ptr<Scene>`. It calls the virtual `update()` and `draw()` methods without needing to know the specific type of scene currently active. |
-| **Encapsulation**         | State-heavy components like `Player`, `Timer`, and `QuizManager` encapsulate their data. For example, `Player` handles its own score calculation and streak logic.              |
-| **Abstraction**           | The `Scene` interface hides the complexity of individual scene implementations from the `Game` controller, allowing for easy addition of new game states.                       |
-| **Composition**           | The `Game` class uses composition by holding a `GameState` object which aggregates various game components like the `QuizManager` and `Player` array.                           |
-| **Single Responsibility** | Each class has one job: `QuizManager` only handles questions, `Timer` only handles time, and `UIStyle` only handles aesthetic presentation.                                     |
+| Principle         | Implementation in Quiz Planet                                            |
+| :---------------- | :----------------------------------------------------------------------- |
+| **Inheritance**   | `MenuScene`, `QuizScene`, `ResultScene` all inherit from `Scene`         |
+| **Polymorphism**  | `Game` calls `update()`/`draw()` on any `Scene*` via `unique_ptr`        |
+| **Encapsulation** | `Player`, `Timer`, `QuizManager` each own their data privately           |
+| **Abstraction**   | `Scene` defines a pure-virtual interface; `Game` never knows which scene |
 
 ---
