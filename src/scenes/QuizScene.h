@@ -14,10 +14,15 @@ class QuizScene : public Scene {
 public:
     QuizScene(GameState& gs) : state(gs), timer(15.0f) {
         questionsAnswered = 0;
-        activeTurn        = 0;
+        selectedP1        = -1;
+        selectedP2        = -1;
+        timeP1            = 0.0f;
+        timeP2            = 0.0f;
+        shakeTimer        = 0.0f;
+        blackoutTimer     = 0.0f;
+        sabotageMessage   = "";
         feedbackState     = FeedbackState::NONE;
         feedbackTimer     = 0.0f;
-        selectedChoice    = -1;
         correctChoice     = -1;
         sceneNext         = SCENE_STAY;
         pulse             = 0.0f;
@@ -34,48 +39,82 @@ public:
             return;
         }
 
+        if (shakeTimer > 0) shakeTimer -= GetFrameTime();
+        if (blackoutTimer > 0) blackoutTimer -= GetFrameTime();
+
         timer.update();
 
-        int pressed = -1;
-        if (state.playerCount == 1 || activeTurn == 0) {
-            if      (IsKeyPressed(KEY_A)) pressed = 0;
-            else if (IsKeyPressed(KEY_B)) pressed = 1;
-            else if (IsKeyPressed(KEY_C)) pressed = 2;
-            else if (IsKeyPressed(KEY_D)) pressed = 3;
+        int pressedP1 = -1;
+        int pressedP2 = -1;
+
+        if (selectedP1 == -1) {
+            if      (IsKeyPressed(KEY_A)) pressedP1 = 0;
+            else if (IsKeyPressed(KEY_B)) pressedP1 = 1;
+            else if (IsKeyPressed(KEY_C)) pressedP1 = 2;
+            else if (IsKeyPressed(KEY_D)) pressedP1 = 3;
+            
+            if (pressedP1 == -1 && IsMouseButtonReleased(MOUSE_LEFT_BUTTON) && state.playerCount == 1) {
+                Vector2 m = GetMousePosition();
+                for (int i = 0; i < 4; i++)
+                    if (CheckCollisionPointRec(m, choiceRects[i])) { pressedP1 = i; break; }
+            }
         }
-        if (state.playerCount == 2 && activeTurn == 1) {
-            if      (IsKeyPressed(KEY_LEFT))  pressed = 0;
-            else if (IsKeyPressed(KEY_UP))    pressed = 1;
-            else if (IsKeyPressed(KEY_RIGHT)) pressed = 2;
-            else if (IsKeyPressed(KEY_DOWN))  pressed = 3;
-        }
-        if (pressed == -1 && IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
-            Vector2 m = GetMousePosition();
-            for (int i = 0; i < 4; i++)
-                if (CheckCollisionPointRec(m, choiceRects[i])) { pressed = i; break; }
+        
+        if (state.playerCount == 2 && selectedP2 == -1) {
+            if      (IsKeyPressed(KEY_KP_1))  pressedP2 = 0;
+            else if (IsKeyPressed(KEY_KP_2))  pressedP2 = 1;
+            else if (IsKeyPressed(KEY_KP_3))  pressedP2 = 2;
+            else if (IsKeyPressed(KEY_KP_4))  pressedP2 = 3;
         }
 
         const Question& q = state.quizManager.current();
         correctChoice = q.correctIndex;
 
-        if (pressed != -1) {
-            selectedChoice = pressed;
-            Player& p = state.players[activeTurn];
-            if (pressed == q.correctIndex) {
-                p.addScore(calculatePoints(p));
-                p.correct++;
-                feedbackState = FeedbackState::CORRECT;
-            } else {
-                p.resetStreak();
-                feedbackState = FeedbackState::WRONG;
+        if (pressedP1 != -1) {
+            selectedP1 = pressedP1;
+            timeP1 = timer.remaining();
+            if (state.players[0].sabotageCharges > 0 && state.playerCount == 2) {
+                state.players[0].sabotageCharges--;
+                if (GetRandomValue(0, 1) == 0) { shakeTimer = 2.0f; sabotageMessage = "P1 used SHAKE!"; }
+                else { blackoutTimer = 2.0f; sabotageMessage = "P1 used BLACKOUT!"; }
             }
-            p.total++;
-            feedbackTimer = 0.0f;
-        } else if (timer.isDone()) {
-            selectedChoice = -1;
-            state.players[activeTurn].resetStreak();
-            state.players[activeTurn].total++;
-            feedbackState = FeedbackState::TIMEOUT;
+        }
+        
+        if (pressedP2 != -1) {
+            selectedP2 = pressedP2;
+            timeP2 = timer.remaining();
+            if (state.players[1].sabotageCharges > 0) {
+                state.players[1].sabotageCharges--;
+                if (GetRandomValue(0, 1) == 0) { shakeTimer = 2.0f; sabotageMessage = "P2 used SHAKE!"; }
+                else { blackoutTimer = 2.0f; sabotageMessage = "P2 used BLACKOUT!"; }
+            }
+        }
+
+        bool p1Done = (selectedP1 != -1);
+        bool p2Done = (state.playerCount == 1) ? true : (selectedP2 != -1);
+
+        if ((p1Done && p2Done) || timer.isDone()) {
+            if (selectedP1 == q.correctIndex) {
+                state.players[0].addScore(calculatePoints(state.players[0], timeP1));
+                state.players[0].correct++;
+                if (state.playerCount == 1) feedbackState = FeedbackState::CORRECT;
+            } else {
+                state.players[0].resetStreak();
+                if (state.playerCount == 1) feedbackState = (selectedP1 == -1) ? FeedbackState::TIMEOUT : FeedbackState::WRONG;
+            }
+            state.players[0].total++;
+
+            if (state.playerCount == 2) {
+                if (selectedP2 == q.correctIndex) {
+                    state.players[1].addScore(calculatePoints(state.players[1], timeP2));
+                    state.players[1].correct++;
+                } else {
+                    state.players[1].resetStreak();
+                }
+                state.players[1].total++;
+                
+                feedbackState = FeedbackState::CORRECT; 
+            }
             feedbackTimer = 0.0f;
         }
     }
@@ -84,19 +123,27 @@ public:
         UIStyle::drawBackground(1280, 720);
         UIStyle::drawStars(1280, 720, pulse);
 
+        if (shakeTimer > 0 && feedbackState == FeedbackState::NONE) {
+            float dx = (float)GetRandomValue(-12, 12);
+            float dy = (float)GetRandomValue(-12, 12);
+            Camera2D cam = {0};
+            cam.offset = {dx, dy};
+            cam.target = {0,0};
+            cam.rotation = 0.0f;
+            cam.zoom = 1.0f;
+            BeginMode2D(cam);
+        }
+
         const Question& q = state.quizManager.current();
 
         // ── Top bar ───────────────────────────────────────────
         DrawRectangle(0, 0, 1280, 50, Fade(UIStyle::BG_SPACE, 0.94f));
         DrawRectangle(0, 49, 1280, 1, Fade(WHITE, 0.07f));
 
-        // Mode label
         const char* modeLabel = (state.playerCount == 2) ? "PvP Mode" : "Solo";
-        Color modeCol = (state.playerCount == 2) ? UIStyle::ACCENT_PINK
-                                                  : UIStyle::ACCENT_CYAN;
+        Color modeCol = (state.playerCount == 2) ? UIStyle::ACCENT_PINK : UIStyle::ACCENT_CYAN;
         UIStyle::drawText(modeLabel, 16, 14, 18, modeCol);
 
-        // Q counter pill
         char qcnt[32];
         snprintf(qcnt, sizeof(qcnt), "Q %d / %d",
                  questionsAnswered+1, state.questionsPerGame);
@@ -106,61 +153,57 @@ public:
         UIStyle::drawText(qcnt, 1280-qcw-20, 16, 18,
                            Fade(UIStyle::TEXT_PRIMARY, 0.82f));
 
-        // PvP turn label (centered)
         if (state.playerCount == 2) {
-            bool p1 = (activeTurn == 0);
-            Color tc = p1 ? UIStyle::ACCENT_CYAN : UIStyle::ACCENT_PINK;
-            const char* tt = p1 ? "Player 1  —  [ A / B / C / D ]"
-                                : "Player 2  —  [ ← / ↑ / → / ↓ ]";
-            UIStyle::drawTextC(tt, 640, 14, 18, tc);
+            UIStyle::drawTextC("Real-time PvP  —  [P1: A-D | P2: Numpad 1-4]", 640, 14, 18, WHITE);
         }
 
         // ── Main card ─────────────────────────────────────────
-        // Shadow
         DrawRectangleRounded({63, 64, 1154, 520}, 0.05f, 8, Fade(BLACK, 0.50f));
-        // Card
         DrawRectangleRounded({60, 60, 1154, 520}, 0.05f, 8, UIStyle::BG_CARD);
         DrawRectangleRoundedLines({60, 60, 1154, 520}, 0.05f, 8, Fade(WHITE, 0.07f));
         DrawRectangleRounded({62, 61, 1150, 3}, 0.5f, 4, Fade(WHITE, 0.06f));
 
-        // ── Category label ────────────────────────────────────
-        UIStyle::drawText(q.category.c_str(), 84, 80, 18,
-                           UIStyle::TEXT_SECONDARY);
-
-        // ── Question text ─────────────────────────────────────
-        UIStyle::drawWrapped(q.text.c_str(), 84, 110, 1106, 32,
-                              UIStyle::TEXT_PRIMARY, 160);
-
-        // Divider
+        UIStyle::drawText(q.category.c_str(), 84, 80, 18, UIStyle::TEXT_SECONDARY);
+        UIStyle::drawWrapped(q.text.c_str(), 84, 110, 1106, 32, UIStyle::TEXT_PRIMARY, 160);
         DrawRectangle(84, 286, 1106, 1, Fade(WHITE, 0.07f));
 
-        // ── Answer buttons (y: 238–482, 2×2) ─────────────────
-        const char* kP1[4] = {"A","B","C","D"};
-        const char* kP2[4] = {"←","↑","→","↓"};
-        for (int i = 0; i < 4; i++)
-            drawAnswer(i, q,
-                       (state.playerCount==2 && activeTurn==1) ? kP2[i] : kP1[i]);
+        // Sabotage UI indicator
+        if (!sabotageMessage.empty() && feedbackState == FeedbackState::NONE) {
+            Color sCol = sabotageMessage.find("P1") != std::string::npos ? UIStyle::ACCENT_CYAN : UIStyle::ACCENT_PINK;
+            int smw = UIStyle::textW(sabotageMessage.c_str(), 24);
+            DrawRectangleRounded({(float)(640-smw/2-24), 220, (float)(smw+48), 40}, 0.5f, 4, Fade(BLACK, 0.8f));
+            UIStyle::drawText(sabotageMessage.c_str(), 640-smw/2, 227, 24, sCol);
+        }
 
-        // ── Timer bar ─────────────────────────────────────────
+        // Apply Blackout mask over answer area IF blackout timer is active
+        if (blackoutTimer > 0 && feedbackState == FeedbackState::NONE) {
+            DrawRectangleRounded({60, 270, 1154, 310}, 0.05f, 8, {(unsigned char)10,(unsigned char)10,(unsigned char)12,(unsigned char)245});
+            int cw = UIStyle::textW("BLACKOUT!", 50);
+            DrawTextEx(UIStyle::FONT_BOLD, "BLACKOUT!", {(float)(640 - cw/2), 380}, 50, 2.0f, UIStyle::ACCENT_RED);
+        } else {
+            const char* kSolo[4] = {"A","B","C","D"};
+            const char* kPvP[4] = {"A|1","B|2","C|3","D|4"};
+            for (int i = 0; i < 4; i++)
+                drawAnswer(i, q, (state.playerCount==2) ? kPvP[i] : kSolo[i]);
+        }
+
         float prog = timer.progress();
         Color tFill = (prog < 0.5f) ? UIStyle::ACCENT_CYAN
                     : (prog < 0.75f) ? (Color){255,160,50,255}
                     :                  UIStyle::ACCENT_RED;
 
         DrawRectangle(0, 600, 1280, 16, Fade(BLACK, 0.4f));
-        UIStyle::drawBar(0, 600, 1280, 16, 1.0f - prog, tFill, {20,12,50,255});
+        UIStyle::drawBar(0, 600, 1280, 16, 1.0f - prog, tFill, {(unsigned char)20,(unsigned char)12,(unsigned char)50,(unsigned char)255});
 
-        // Time number above bar
         char tStr[12]; snprintf(tStr, sizeof(tStr), "%02.0f", timer.remaining());
         int tsw = UIStyle::textW(tStr, 20);
         DrawRectangleRounded({(float)(640-tsw/2-10), 570, (float)(tsw+20), 28},
                               0.4f, 4, Fade(UIStyle::BG_SPACE, 0.95f));
         UIStyle::drawText(tStr, 640-tsw/2, 574, 20, tFill);
 
-        // ── Scores (514–570) ──────────────────────────────────
         drawScores();
-
-        // ── Feedback ──────────────────────────────────────────
+        if (shakeTimer > 0 && feedbackState == FeedbackState::NONE) EndMode2D();
+        
         if (feedbackState != FeedbackState::NONE) drawFeedback(q);
     }
 
@@ -169,12 +212,17 @@ public:
 private:
     GameState&    state;
     Timer         timer;
-    int           questionsAnswered, activeTurn, selectedChoice, correctChoice;
+    int           questionsAnswered;
+    int           selectedP1, selectedP2, correctChoice;
+    float         timeP1, timeP2;
+    float         shakeTimer, blackoutTimer;
+    std::string   sabotageMessage;
+    
     FeedbackState feedbackState;
     float         feedbackTimer, pulse;
     int           sceneNext;
     Rectangle     choiceRects[4];
-    static constexpr float FEEDBACK_DURATION = 1.8f;
+    static constexpr float FEEDBACK_DURATION = 3.0f; // Extended slightly for PvP reading time
 
     void buildChoiceRects() {
         float cx = 84.0f, sy = 296.0f;
@@ -185,17 +233,19 @@ private:
         choiceRects[3] = {cx+bw+gap,sy+bh+gap,   bw, bh};
     }
 
-    int calculatePoints(const Player& p) {
-        return 100 + (int)(timer.remaining()*10.0f) + p.streak*10;
+    int calculatePoints(const Player& p, float timeRem) {
+        if (timeRem < 0) timeRem = 0.0f;
+        return 100 + (int)(timeRem*10.0f) + p.streak*10;
     }
 
     void advanceQuestion() {
         feedbackState = FeedbackState::NONE;
-        selectedChoice = correctChoice = -1;
-        feedbackTimer = 0.0f;
+        selectedP1 = selectedP2 = correctChoice = -1;
+        timeP1 = timeP2 = shakeTimer = blackoutTimer = feedbackTimer = 0.0f;
+        sabotageMessage = "";
+        
         timer.reset();
         questionsAnswered++;
-        if (state.playerCount == 2) activeTurn = 1 - activeTurn;
         
         if (questionsAnswered >= state.questionsPerGame ||
             state.quizManager.currentIndex + 1 >= state.quizManager.totalQuestions()) {
@@ -213,14 +263,26 @@ private:
         if (feedbackState == FeedbackState::NONE) {
             hov = CheckCollisionPointRec(GetMousePosition(), r);
             bg      = hov ? Fade(WHITE, 0.18f) : Fade(WHITE, 0.08f);
-            border  = hov ? Fade(WHITE, 0.45f) : Fade(WHITE, 0.14f);
+            
+            if (state.playerCount == 2) {
+                if (selectedP1 == idx && selectedP2 == idx) border = Fade(WHITE, 0.9f);
+                else if (selectedP1 == idx) border = UIStyle::ACCENT_CYAN;
+                else if (selectedP2 == idx) border = UIStyle::ACCENT_PINK;
+                else border = hov ? Fade(WHITE, 0.45f) : Fade(WHITE, 0.14f);
+            } else {
+                if (selectedP1 == idx) border = UIStyle::ACCENT_CYAN;
+                else border = hov ? Fade(WHITE, 0.45f) : Fade(WHITE, 0.14f);
+            }
             textCol = UIStyle::TEXT_PRIMARY;
         } else {
+            bool p1C = (selectedP1 == idx);
+            bool p2C = (state.playerCount == 2 && selectedP2 == idx);
+            
             if (idx == correctChoice) {
-                bg = {22, 130, 60, 215}; border = UIStyle::ACCENT_GREEN;
+                bg = {(unsigned char)22, (unsigned char)130, (unsigned char)60, (unsigned char)215}; border = UIStyle::ACCENT_GREEN;
                 textCol = UIStyle::TEXT_PRIMARY;
-            } else if (idx == selectedChoice && feedbackState == FeedbackState::WRONG) {
-                bg = {170, 32, 32, 200}; border = UIStyle::ACCENT_RED;
+            } else if (p1C || p2C) {
+                bg = {(unsigned char)170, (unsigned char)32, (unsigned char)32, (unsigned char)200}; border = UIStyle::ACCENT_RED;
                 textCol = UIStyle::TEXT_PRIMARY;
             } else {
                 bg = Fade(WHITE, 0.04f); border = Fade(WHITE, 0.07f);
@@ -228,135 +290,121 @@ private:
             }
         }
 
-        // Shadow + body
-        DrawRectangleRounded({r.x+2, r.y+2, r.width, r.height},
-                              0.10f, 6, Fade(BLACK, 0.35f));
+        DrawRectangleRounded({r.x+2, r.y+2, r.width, r.height}, 0.10f, 6, Fade(BLACK, 0.35f));
         DrawRectangleRounded(r, 0.10f, 6, bg);
         DrawRectangleRoundedLines(r, 0.10f, 6, border);
-        // Top highlight
-        DrawRectangleRounded({r.x+2, r.y+2, r.width-4, 2},
-                              0.5f, 4, Fade(WHITE, 0.07f));
+        DrawRectangleRounded({r.x+2, r.y+2, r.width-4, 2}, 0.5f, 4, Fade(WHITE, 0.07f));
 
-        // Correct badge (top-right, shown after answer)
-        if (feedbackState != FeedbackState::NONE && idx == correctChoice) {
-            Rectangle ck = {r.x + r.width - 50, r.y + 10, 38, 24};
-            DrawRectangleRounded(ck, 0.4f, 4, UIStyle::ACCENT_GREEN);
-            int cw = UIStyle::textW("OK", 13);
-            UIStyle::drawText("OK",
-                (int)(ck.x + ck.width/2 - cw/2),
-                (int)(ck.y + ck.height/2 - 7),
-                13, WHITE);
+        UIStyle::drawWrapped(q.choices[idx].c_str(), (int)r.x + 24, (int)r.y + 16, (int)r.width - 48, 28, textCol, (int)r.height - 32);
+
+        if (feedbackState == FeedbackState::NONE) {
+            DrawRectangleRounded({r.x + r.width - 50, r.y + r.height - 30, 40, 20}, 0.3f, 4, Fade(BLACK, 0.5f));
+            UIStyle::drawText(key, (int)(r.x + r.width - 45), (int)(r.y + r.height - 28), 14, Fade(WHITE, 0.5f));
         }
 
-        // Answer text
-        UIStyle::drawWrapped(q.choices[idx].c_str(),
-                              (int)r.x + 24, (int)r.y + 16,
-                              (int)r.width - 48, 28, textCol,
-                              (int)r.height - 32);
+        if (feedbackState != FeedbackState::NONE) {
+            if (idx == correctChoice) {
+                Rectangle ck = {r.x + r.width - 50, r.y + 10, 38, 24};
+                DrawRectangleRounded(ck, 0.4f, 4, UIStyle::ACCENT_GREEN);
+                int cw = UIStyle::textW("OK", 13);
+                UIStyle::drawText("OK", (int)(ck.x + ck.width/2 - cw/2), (int)(ck.y + ck.height/2 - 7), 13, WHITE);
+            }
+            if (selectedP1 == idx) {
+                Rectangle ck = {r.x + r.width - (idx==correctChoice?95:50), r.y + 10, 38, 24};
+                DrawRectangleRounded(ck, 0.4f, 4, UIStyle::ACCENT_CYAN);
+                int cw = UIStyle::textW("P1", 13);
+                UIStyle::drawText("P1", (int)(ck.x + ck.width/2 - cw/2), (int)(ck.y + ck.height/2 - 7), 13, BLACK);
+            }
+            if (state.playerCount == 2 && selectedP2 == idx) {
+                int off = 50 + (idx==correctChoice?45:0) + (selectedP1==idx?45:0);
+                Rectangle ck = {r.x + r.width - off, r.y + 10, 38, 24};
+                DrawRectangleRounded(ck, 0.4f, 4, UIStyle::ACCENT_PINK);
+                int cw = UIStyle::textW("P2", 13);
+                UIStyle::drawText("P2", (int)(ck.x + ck.width/2 - cw/2), (int)(ck.y + ck.height/2 - 7), 13, BLACK);
+            }
+        }
     }
 
     void drawScores() {
         if (state.playerCount == 2) {
-            UIStyle::drawScorePill(20, 634, 280, 70,
-                "Player 1", state.players[0].score, state.players[0].streak,
-                UIStyle::ACCENT_CYAN, activeTurn == 0);
-            UIStyle::drawScorePill(980, 634, 280, 70,
-                "Player 2", state.players[1].score, state.players[1].streak,
-                UIStyle::ACCENT_PINK, activeTurn == 1);
-            // Turn dot
-            Color dc = (activeTurn==0) ? UIStyle::ACCENT_CYAN : UIStyle::ACCENT_PINK;
-            DrawCircle(640, 665, 6, dc);
-            DrawCircleLines(640, 665, 10, Fade(dc, 0.35f));
+            UIStyle::drawScorePill(20, 634, 280, 70, "Player 1", state.players[0].score, state.players[0].streak, UIStyle::ACCENT_CYAN, selectedP1==-1);
+            UIStyle::drawScorePill(980, 634, 280, 70, "Player 2", state.players[1].score, state.players[1].streak, UIStyle::ACCENT_PINK, selectedP2==-1);
+            
+            if (state.players[0].sabotageCharges > 0) {
+                char chg[32]; snprintf(chg, sizeof(chg), "%d ATK", state.players[0].sabotageCharges);
+                UIStyle::drawTextC(chg, 160, 712, 16, UIStyle::ACCENT_GOLD);
+            }
+            if (state.players[1].sabotageCharges > 0) {
+                char chg[32]; snprintf(chg, sizeof(chg), "%d ATK", state.players[1].sabotageCharges);
+                UIStyle::drawTextC(chg, 1120, 712, 16, UIStyle::ACCENT_GOLD);
+            }
         } else {
             char sc[32];
             snprintf(sc, sizeof(sc), "%d pts", state.players[0].score);
             int sw = UIStyle::textW(sc, 24);
-            DrawRectangleRounded({(float)(640-sw/2-24), 634,
-                                   (float)(sw+48), 40},
-                                  0.4f, 4, Fade(WHITE, 0.07f));
-            UIStyle::drawText(sc, 640-sw/2, 642, 24,
-                               Fade(UIStyle::TEXT_PRIMARY, 0.82f));
+            DrawRectangleRounded({(float)(640-sw/2-24), 634, (float)(sw+48), 40}, 0.4f, 4, Fade(WHITE, 0.07f));
+            UIStyle::drawText(sc, 640-sw/2, 642, 24, Fade(UIStyle::TEXT_PRIMARY, 0.82f));
+            
             if (state.players[0].streak >= 2) {
-                char stk[24];
-                snprintf(stk, sizeof(stk), "x%d streak",
-                         state.players[0].streak);
+                char stk[24]; snprintf(stk, sizeof(stk), "x%d streak", state.players[0].streak);
                 UIStyle::drawTextC(stk, 640, 690, 18, UIStyle::ACCENT_GOLD);
+            }
+            if (state.players[0].sabotageCharges > 0) {
+                char chg[32]; snprintf(chg, sizeof(chg), "%d ATK CHARGES (N/A IN SOLO)", state.players[0].sabotageCharges);
+                UIStyle::drawTextC(chg, 640, 710, 14, Fade(WHITE, 0.3f));
             }
         }
     }
 
     void drawFeedback(const Question& q) {
-        const char* msg;
-        Color mc;
-        switch (feedbackState) {
-            case FeedbackState::CORRECT: msg="Correct!";  mc=UIStyle::ACCENT_GREEN; break;
-            case FeedbackState::WRONG:   msg="Wrong!";    mc=UIStyle::ACCENT_RED;   break;
-            default:                     msg="Time's Up!";mc={255,160,50,255};      break;
-        }
-
-        // Animate banner sliding in
         float frac = feedbackTimer / FEEDBACK_DURATION;
-        // Pop in quickly during the first 1/6th of the duration
         float ease = (frac * 6.0f);
         if (ease > 1.0f) ease = 1.0f;
-        float alpha = 1.0f - powf(1.0f - ease, 3.0f); // cubic ease out
+        float alpha = 1.0f - powf(1.0f - ease, 3.0f);
 
-        // Banner dimensions
         int bh = 140; 
         int by = 360 - bh/2;
+        
+        Color mc = (state.playerCount == 2) ? UIStyle::ACCENT_GOLD : 
+                  (feedbackState == FeedbackState::CORRECT ? UIStyle::ACCENT_GREEN : 
+                   (feedbackState == FeedbackState::WRONG ? UIStyle::ACCENT_RED : (Color){(unsigned char)255,(unsigned char)160,(unsigned char)50,(unsigned char)255}));
 
-        // Draw horizontal sweep background over the middle, avoiding full screen blackout
         DrawRectangle(0, by, 1280, bh, Fade(UIStyle::BG_SPACE, 0.94f * alpha));
         DrawRectangle(0, by, 1280, 2,  Fade(mc, 0.8f * alpha));
         DrawRectangle(0, by+bh-2, 1280, 2,  Fade(mc, 0.8f * alpha));
 
         if (alpha > 0.05f) {
-            // Big result text (Left Side)
             float fs = 64.0f;
-            int mw = UIStyle::textW(msg, fs);
-            int txtX = 320 - mw/2;
-            int txtY = 360 - (int)fs/2;
-            
-            // Shadow
-            DrawTextEx(UIStyle::FONT_REG, msg,
-                       {(float)(txtX+3), (float)(txtY+3)}, fs, 2.0f, Fade(BLACK, 0.8f * alpha));
-            // Glow
-            DrawTextEx(UIStyle::FONT_REG, msg,
-                       {(float)(txtX-2), (float)(txtY-2)}, fs, 2.0f, Fade(mc, 0.28f * alpha));
-            // Fill
-            DrawTextEx(UIStyle::FONT_REG, msg,
-                       {(float)txtX, (float)txtY}, fs, 2.0f, Fade(mc, alpha));
+            const char* centerMsg = (state.playerCount == 2) ? "Round Over!" :
+                                    (feedbackState == FeedbackState::CORRECT ? "Correct!" : 
+                                     (feedbackState == FeedbackState::WRONG ? "Wrong!" : "Time's Up!"));
 
-            // Points or Answer string (Right Side)
-            if (feedbackState == FeedbackState::CORRECT) {
-                char pts[32];
-                snprintf(pts, sizeof(pts), "+%d pts",
-                         calculatePoints(state.players[activeTurn]));
-                int pw = UIStyle::textW(pts, 40);
-                int px = 960 - pw/2;
-                int py = 360 - 20;
+            int mw = UIStyle::textW(centerMsg, fs);
+            DrawTextEx(UIStyle::FONT_REG, centerMsg, {(float)(640 - mw/2), (float)(360 - fs/2 - 20)}, fs, 2.0f, Fade(mc, alpha));
 
-                // Points badge
-                DrawRectangleRounded({(float)(px-24), (float)(py-12), (float)(pw+48), 64},
-                                      0.4f, 4, Fade(mc, 0.18f * alpha));
-                DrawRectangleRoundedLines({(float)(px-24), (float)(py-12), (float)(pw+48), 64},
-                                           0.4f, 4, Fade(mc, 0.50f * alpha));
-                UIStyle::drawTextC(pts, 960, py, 40, Fade(mc, alpha));
+            if (state.playerCount == 2) {
+                char p1M[64];
+                if (selectedP1 == q.correctIndex) snprintf(p1M, sizeof(p1M), "P1: +%d", calculatePoints(state.players[0], timeP1));
+                else if (selectedP1 == -1) snprintf(p1M, sizeof(p1M), "P1: Time Out");
+                else snprintf(p1M, sizeof(p1M), "P1: Miss");
+                UIStyle::drawTextC(p1M, 320, 370, 30, UIStyle::ACCENT_CYAN);
+
+                char p2M[64];
+                if (selectedP2 == q.correctIndex) snprintf(p2M, sizeof(p2M), "P2: +%d", calculatePoints(state.players[1], timeP2));
+                else if (selectedP2 == -1) snprintf(p2M, sizeof(p2M), "P2: Time Out");
+                else snprintf(p2M, sizeof(p2M), "P2: Miss");
+                UIStyle::drawTextC(p2M, 960, 370, 30, UIStyle::ACCENT_PINK);
             } else {
-                char ans[200];
-                snprintf(ans, sizeof(ans), "Answer: %s",
-                         q.choices[q.correctIndex].c_str());
-                while (UIStyle::textW(ans, 26) > 520 && strlen(ans) > 8)
-                    ans[strlen(ans)-1] = 0;
-                
-                UIStyle::drawTextC(ans, 960, 360 - 13, 26, Fade(UIStyle::TEXT_PRIMARY, 0.95f * alpha));
+                if (feedbackState == FeedbackState::CORRECT) {
+                    char pts[32]; snprintf(pts, sizeof(pts), "+%d pts", calculatePoints(state.players[0], timeP1));
+                    UIStyle::drawTextC(pts, 640, 380, 40, Fade(mc, alpha));
+                } else {
+                    char ans[200]; snprintf(ans, sizeof(ans), "Answer: %s", q.choices[q.correctIndex].c_str());
+                    UIStyle::drawTextC(ans, 640, 380, 26, Fade(UIStyle::TEXT_PRIMARY, 0.95f * alpha));
+                }
             }
-
-            // Middle vertical divider
-            DrawRectangle(639, by+20, 2, bh-40, Fade(mc, 0.35f * alpha));
         }
 
-        // Progress drain bar shrinking at the bottom of the card
         DrawRectangle(60, 574, 1154, 6, Fade(WHITE, 0.07f));
         DrawRectangle(60, 574, (int)(1154*(1.0f - frac)), 6, Fade(mc, 0.85f));
     }
