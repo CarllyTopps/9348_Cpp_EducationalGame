@@ -1,6 +1,6 @@
 #pragma once
-#include "Question.h"
-#include "../lib/json.hpp"
+#include "../entities/Question.h"
+#include "../../lib/json.hpp"
 #include <vector>
 #include <string>
 #include <fstream>

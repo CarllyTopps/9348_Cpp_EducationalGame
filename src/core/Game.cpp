@@ -1,9 +1,10 @@
 #include "Game.h"
-#include "scenes/MenuScene.h"
-#include "scenes/CategoryScene.h"
-#include "scenes/QuestionCountScene.h"
-#include "scenes/QuizScene.h"
-#include "scenes/ResultScene.h"
+#include "../scenes/MenuScene.h"
+#include "../scenes/CategoryScene.h"
+#include "../scenes/QuestionCountScene.h"
+#include "../scenes/QuizScene.h"
+#include "../scenes/ResultScene.h"
+#include "../ui/UIStyle.h"
 #include <stdexcept>
 
 void Game::run() {

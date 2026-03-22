@@ -1,8 +1,8 @@
 #pragma once
-#include "Scene.h"
-#include "../Game.h"
-#include "../Timer.h"
-#include "UIStyle.h"
+#include "../core/Scene.h"
+#include "../core/Game.h"
+#include "../service/Timer.h"
+#include "../ui/UIStyle.h"
 #include "raylib.h"
 #include <cmath>
 #include <string>

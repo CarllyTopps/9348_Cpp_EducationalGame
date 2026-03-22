@@ -5,25 +5,10 @@
 #include <vector>
 #include <cstdio>
 
-// ═══════════════════════════════════════════════════════════
-//  UIStyle  —  clean, readable, Discord-inspired helpers
-//
-//  SETUP: put "font.ttf" in your working directory.
-//  Recommended free fonts (rename to font.ttf):
-//    • Nunito-Regular.ttf   (rounded, very readable)
-//    • Outfit-Regular.ttf   (clean, modern)
-//    • Rubik-Regular.ttf    (friendly, game-like)
-//  Download from fonts.google.com
-//
-//  Call UIStyle::load()  once in Game::init()
-//  Call UIStyle::unload() once in Game::shutdown()
-// ═══════════════════════════════════════════════════════════
-
 namespace UIStyle {
 
-// ── Fonts ─────────────────────────────────────────────────
-inline Font FONT_REG;   // regular weight
-inline Font FONT_BOLD;  // same file loaded at larger base size (raylib trick)
+inline Font FONT_REG;
+inline Font FONT_BOLD;  
 inline bool fontLoaded = false;
 
 inline void load() {

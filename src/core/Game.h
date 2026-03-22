@@ -1,8 +1,8 @@
 #pragma once
 #include "raylib.h"
-#include "scenes/Scene.h"
-#include "Player.h"
-#include "QuizManager.h"
+#include "Scene.h"
+#include "../entities/Player.h"
+#include "../service/QuizManager.h"
 #include <memory>
 #include <string>
 #include <vector>

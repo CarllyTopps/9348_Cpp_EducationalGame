@@ -1,7 +1,7 @@
 #pragma once
-#include "Scene.h"
-#include "../Game.h"
-#include "UIStyle.h"
+#include "../core/Scene.h"
+#include "../core/Game.h"
+#include "../ui/UIStyle.h"
 #include "raylib.h"
 #include <cmath>
 #include <cstdlib>

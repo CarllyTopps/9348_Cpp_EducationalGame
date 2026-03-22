@@ -27,25 +27,28 @@ QuizPlanet/
 ├── lib/
 │   └── json.hpp           ← Lightweight JSON parsing library
 ├── assets/
-│   └── fonts              ← fonts
-│   └── questions.json     ← questions database
+│   ├── fonts/             ← UI Fonts (Outfit)
+│   └── questions.json     ← The main question database
 ├── src/
-│   ├── main.cpp           ← Entry point
-│   ├── Game.h / Game.cpp  ← Main controller + game loop
-│   ├── Question.h         ← Question data struct
-│   ├── Player.h           ← Player state (score, streak, accuracy)
-│   ├── Timer.h            ← Countdown timer
-│   ├── QuizManager.h      ← Load + shuffle from JSON, category filtering
-│   └── scenes/
-│       ├── Scene.h        ← Abstract base class
-│       ├── UIStyle.h      ← Centralized UI graphics & text rendering
-│       ├── MenuScene.h    ← Main menu
-│       ├── CategoryScene.h← Subject selection menu
-│       ├── QuestionCountScene.h ← Game length selection
-│       ├── QuizScene.h    ← Core gameplay loop
-│       └── ResultScene.h  ← End game statistics & grades
-├── questions.json         ← Question bank database
-└── CMakeLists.txt         ← Build system
+│   ├── main.cpp           ← Minimal entry point
+│   ├── core/              ← Engine & Foundation
+│   │   ├── Game.h / .cpp  ← Scene manager & main loop
+│   │   └── Scene.h        ← Abstract base class for all scenes
+│   ├── entities/          ← Data Models
+│   │   ├── Player.h       ← Player stats (score, streak, sabotages)
+│   │   └── Question.h     ← Question data structure
+│   ├── service/             ← Business Logic
+│   │   ├── QuizManager.h  ← JSON parsing, shuffling, & filtering
+│   │   └── Timer.h        ← Core gameplay timer
+│   ├── ui/                ← Visual Presentation
+│   │   └── UIStyle.h      ← Global theme, colors, and drawing helpers
+│   └── scenes/            ← Gameplay States
+│       ├── MenuScene.h
+│       ├── CategoryScene.h
+│       ├── QuestionCountScene.h
+│       ├── QuizScene.h
+│       └── ResultScene.h
+└── Makefile               ← Cross-platform build script
 ```
 
 ---
@@ -102,19 +105,23 @@ Because the workspace is fully configured:
 2. Open `main.cpp` (or any source file).
 3. **Press `F5`** (or go to `Run` > `Start Debugging`).
 
-VS Code will automatically trigger the `build debug` task (compiling all `.cpp` files in `src/` and `src/scenes/`), link the Raylib library, and immediately attach the debugger to `QuizPlanet.exe`.
+VS Code will automatically trigger the `build debug` task (compiling all `.cpp` files in `src/` and `src/core/`), link the Raylib library, and immediately attach the debugger to `QuizPlanet.exe`.
 
 > If the game crashes or hits an unexpected error, the debugger will immediately pause execution and highlight the exact line of code causing the issue in VS Code!
 
 ---
 
-## OOP Design
+## Object-Oriented Programming (OOP) Design
 
-| Concept           | Applied In                                                               |
-| ----------------- | ------------------------------------------------------------------------ |
-| **Inheritance**   | `MenuScene`, `QuizScene`, `ResultScene` all inherit from `Scene`         |
-| **Polymorphism**  | `Game` calls `update()`/`draw()` on any `Scene*` via `unique_ptr`        |
-| **Encapsulation** | `Player`, `Timer`, `QuizManager` each own their data privately           |
-| **Abstraction**   | `Scene` defines a pure-virtual interface; `Game` never knows which scene |
+The project is built on solid OOP foundations to ensure the code is scalable and maintainable:
+
+| Principle                 | Implementation in Quiz Planet                                                                                                                                                   |
+| :------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Inheritance**           | All gameplay states (e.g., `QuizScene`, `MenuScene`) inherit from the `Scene` abstract base class.                                                                              |
+| **Polymorphism**          | The `Game` engine manages a `std::unique_ptr<Scene>`. It calls the virtual `update()` and `draw()` methods without needing to know the specific type of scene currently active. |
+| **Encapsulation**         | State-heavy components like `Player`, `Timer`, and `QuizManager` encapsulate their data. For example, `Player` handles its own score calculation and streak logic.              |
+| **Abstraction**           | The `Scene` interface hides the complexity of individual scene implementations from the `Game` controller, allowing for easy addition of new game states.                       |
+| **Composition**           | The `Game` class uses composition by holding a `GameState` object which aggregates various game components like the `QuizManager` and `Player` array.                           |
+| **Single Responsibility** | Each class has one job: `QuizManager` only handles questions, `Timer` only handles time, and `UIStyle` only handles aesthetic presentation.                                     |
 
 ---

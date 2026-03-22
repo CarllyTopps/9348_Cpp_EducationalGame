@@ -16,7 +16,7 @@
                 "args": [
                     "RAYLIB_PATH=C:/raylib/raylib",
                     "PROJECT_NAME=QuizPlanet",
-                    "OBJS=src/*.cpp",
+                    "OBJS=src/*.cpp src/core/*.cpp",
                     "BUILD_MODE=DEBUG"
                 ]
             },
@@ -57,7 +57,7 @@
                 "args": [
                     "RAYLIB_PATH=C:/raylib/raylib",
                     "PROJECT_NAME=QuizPlanet",
-                    "OBJS=src/*.cpp"
+                    "OBJS=src/*.cpp src/core/*.cpp"
                 ]
             },
             "osx": {
